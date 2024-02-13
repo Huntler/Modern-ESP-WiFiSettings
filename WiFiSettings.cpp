@@ -360,21 +360,6 @@ void WiFiSettingsClass::portal() {
         if (slurp("/wifi-password").length()) http.sendContent("##**##**##**");
         http.sendContent(F("'></label><hr>"));
 
-        if (WiFiSettingsLanguage::multiple()) {
-            http.sendContent(F("<label>")); 
-            http.sendContent(_WSL_T.language); 
-            http.sendContent(F(":<br><select name=language>"));
-
-            for (auto& lang : WiFiSettingsLanguage::languages) {
-                String opt = F("<option value='{code}'{sel}>{name}</option>");
-                opt.replace("{code}", lang.first);
-                opt.replace("{name}", lang.second);
-                opt.replace("{sel}", language == lang.first ? " selected" : "");
-                http.sendContent(opt);
-            }
-            http.sendContent(F("</select></label>"));
-        }
-
         for (auto& p : params) {
             http.sendContent(p->html());
         }
@@ -390,14 +375,6 @@ void WiFiSettingsClass::portal() {
     http.on("/", HTTP_POST, [this, &http]() {
         bool ok = true;
         if (! spurt("/wifi-ssid", http.arg("ssid"))) ok = false;
-
-        if (WiFiSettingsLanguage::multiple()) {
-            if (! spurt("/WiFiSettings-language", http.arg("language"))) ok = false;
-            // Don't update immediately, because there is currently
-            // no mechanism for reloading param strings.
-            //language = http.arg("language");
-            //WiFiSettingsLanguage::select(T, language);
-        }
 
         String pw = http.arg("password");
         if (pw != "##**##**##**") {
@@ -492,12 +469,7 @@ void WiFiSettingsClass::begin() {
     // These things can't go in the constructor because the constructor runs
     // before ESPFS.begin()
 
-    String user_language = slurp("/WiFiSettings-language");
-    user_language.trim();
-    if (user_language.length() && WiFiSettingsLanguage::available(user_language)) {
-        language = user_language;
-    }
-    WiFiSettingsLanguage::select(_WSL_T, language);  // can update language
+    WiFiSettingsLanguage::english(_WSL_T);
 
     if (!secure) {
         secure = checkbox(
@@ -532,8 +504,6 @@ WiFiSettingsClass::WiFiSettingsClass() {
     #else
         hostname = F("esp8266-");
     #endif
-
-    language = "en";
 }
 
 WiFiSettingsClass WiFiSettings;
