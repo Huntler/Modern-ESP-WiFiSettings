@@ -6,21 +6,8 @@
     #include <WiFi.h>
     #include <WebServer.h>
     #include <esp_task_wdt.h>
-#elif ESP8266
-    #define ESPFS LittleFS
-    #define ESPMAC (Sprintf("%06" PRIx32, ESP.getChipId()))
-    #include <LittleFS.h>
-    #include <ESP8266WiFi.h>
-    #include <ESP8266WebServer.h>
-    #define WebServer ESP8266WebServer
-    #define esp_task_wdt_reset wdt_reset
-    #define wifi_auth_mode_t uint8_t    // wl_enc_type
-    #define WIFI_AUTH_OPEN ENC_TYPE_NONE
-    constexpr auto WIFI_AUTH_WPA2_ENTERPRISE = -1337; // not available on ESP8266
-    #define setHostname hostname
-    #define INADDR_NONE IPAddress(0,0,0,0)
 #else
-    #error "This library only supports ESP32 and ESP8266"
+    #error "This library only supports ESP32"
 #endif
 #include <DNSServer.h>
 #include <limits.h>
@@ -501,8 +488,6 @@ void WiFiSettingsClass::begin() {
 WiFiSettingsClass::WiFiSettingsClass() {
     #ifdef ESP32
         hostname = F("esp32-");
-    #else
-        hostname = F("esp8266-");
     #endif
 }
 

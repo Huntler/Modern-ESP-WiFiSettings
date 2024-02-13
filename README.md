@@ -1,3 +1,12 @@
+# Overhaul of the WiFi configuration manager for the ESP32
+This projects aims on minimizing the [original libraries](https://github.com/Juerd/ESP-WiFiSettings) size while making the frontend prettier.
+
+- CSS overhaul
+- Dropped language seletion (-2% size)
+- Dropped ESP8266 platform
+
+The original readme is located below.
+
 # WiFi configuration manager for the ESP32 and ESP8266 platforms in the Arduino framework
 
 <p align=center>
