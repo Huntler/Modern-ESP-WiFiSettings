@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<meta charset=UTF-8><title></title>
+</title>
+<meta name=viewport content='width=device-width,initial-scale=1'>
+
+<!-- The following css (everything within the <style>-brackets) is a duplicate and was used to test and design the frontend. -->
+
+<style>
+    *{box-sizing:border-box} 
+    html{
+        background:#eee;
+        color: #111;
+        font: 10pt sans-serif
+    }
+
+    body{
+        background:#fff;
+        color:#111;
+        max-width:30em;
+        padding:1em;
+        margin:1em auto;
+        box-shadow: 0px 0px 20px #ccc;
+        border-radius: 8px;
+    }
+
+    a {
+        color: #6f56ff;
+    }
+
+    select, input {
+        display: block;
+        width: 100%;
+        padding: .3ex;
+    }
+
+    input[type^=s]{
+        display: inline;
+        width: auto;
+        border: 0;
+        color: #fff;
+        background:#6f56ff;
+        padding: 1ex;
+        border-radius: 8px;
+        box-shadow: 0px 0px 10px #ccc;
+    }
+    select,input{
+        display: inline;
+        border: 0;
+        color: #111;
+        background:#eee;
+        padding: 1ex;
+        margin: 8px 0px 8px 0px;
+        border-radius: 8px;
+        box-shadow: 0px 0px 10px #ccc;
+        appearance: none;
+    }
+
+    hr {
+        border: 1px solid #6f56ff40;
+        border-radius: 5px;
+    }
+</style>
+
+<!-- The form shown by the ESP WifiSettings plugin. This html snippet is used to test and design new css code. -->
+<form method=post>
+    <input type=submit value="Restart">
+</form>
+<hr>
+<h1>Titel</h1>
+
+<form method=post>
+    <label>SSID:<br><b class=s></b>
+    <select name=ssid>
+        <option value='{ssid}' selected>Network A</option>
+        <option value='{ssid}' selected>Network B</option>
+        <option value='{ssid}' selected>Network C</option>
+    </select>
+    </label>
+    <a>Rescan</a>
+
+    <p><label>Password:<br><input name=password value="***-***-***"></label>
+    <hr>
+
+    <label>Language:<br><select name=language>
+        <option value='{ssid}' selected>English</option>
+        <option value='{ssid}' selected>Nederlands</option>
+        <option value='{ssid}' selected>Deutsch</option>
+    </select></label>
+
+    <p style='position:sticky;bottom:0;text-align:right'>
+        <input type=submit value="Save">
+    </p>
+</form>
+    

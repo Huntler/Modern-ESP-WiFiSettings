@@ -30,6 +30,8 @@ class WiFiSettingsClass {
         bool secure;
         String language;
 
+        String accentColor = "#6f56ff";
+
         TCallback onConnect;
         TCallbackReturnsInt onWaitLoop;
         TCallback onSuccess;

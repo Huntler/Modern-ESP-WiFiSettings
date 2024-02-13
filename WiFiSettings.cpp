@@ -288,27 +288,24 @@ void WiFiSettingsClass::portal() {
         http.send(200, "text/html");
         http.sendContent(F("<!DOCTYPE html>\n<meta charset=UTF-8><title>"));
         http.sendContent(html_entities(hostname));
-        http.sendContent(F("</title>"
+        String style = F("</title>"
             "<meta name=viewport content='width=device-width,initial-scale=1'>"
             "<style>"
             "*{box-sizing:border-box} "
-            "html{background:#444;font:10pt sans-serif}"
-            "body{background:#ccc;color:black;max-width:30em;padding:1em;margin:1em auto}"
-            "a:link{color:#000} "
-            "label{clear:both}"
-            "select,input:not([type^=c]){display:block;width:100%;border:1px solid #444;padding:.3ex}"
-            "input[type^=s]{display:inline;width:auto;background:#de1;padding:1ex;border:1px solid #000;border-radius:1ex}"
-            "[type^=c]{float:left;margin-left:-1.5em}"
-            ":not([type^=s]):focus{outline:2px solid #d1ed1e}"
-            ".w::before{content:'\\26a0\\fe0f'}"
-            "p::before{margin-left:-2em;float:left;padding-top:1ex}"
-            ".i::before{content:'\\2139\\fe0f'}"
-            ".c{display:block;padding-left:2em}"
-            ".w,.i{display:block;padding:.5ex .5ex .5ex 3em}"
-            ".w,.i{background:#aaa;min-height:3em}"
+            "html{background:#eee;font:10pt sans-serif;color:#111}"
+            "body{background:#fff;color:#111;max-width:30em;padding:1em;margin:1em auto;box-shadow:0px 0px 20px #ccc;border-radius:8px}"
+            "a:link{color:{accent_color}} "
+            "select,input{display:block;width:100%; padding:.3ex;}"
+            "input[type^=s]{display:inline;width:auto;border:0;color:#fff;background:{accent_color};"
+            "padding:1ex;border-radius:8px;box-shadow:0px 0px 10px #ccc;}"
+            "select,input{display:inline;border:0;color:#111;background:#eee;padding: 1ex;"
+            "margin:8px 0px 8px 0px;border-radius:8px;box-shadow:0px 0px 10px #ccc;appearance:none;}"
+            "hr{border: 1px solid {accent_color}40;border-radius: 5px;}"
             "</style>"
             "<form action=/restart method=post>"
-        ));
+        );
+        style.replace("{accent_color}", WiFiSettingsClass::accentColor);
+        http.sendContent(style);
         http.sendContent(F("<input type=submit value=\""));
         http.sendContent(_WSL_T.button_restart);
         http.sendContent(F("\"></form><hr><h1>"));
@@ -387,7 +384,7 @@ void WiFiSettingsClass::portal() {
             "<input type=submit value=\""
         ));
         http.sendContent(_WSL_T.button_save);
-        http.sendContent(F("\"style='font-size:150%'></form>"));
+        http.sendContent(F("\"></form>"));
     });
 
     http.on("/", HTTP_POST, [this, &http]() {
