@@ -1,5 +1,5 @@
 # Overhaul of the WiFi configuration manager for the ESP32
-This projects aims on minimizing the [original libraries](https://github.com/Juerd/ESP-WiFiSettings) size while making the frontend prettier.
+This projects aims on minimizing the [original libraries](https://github.com/Juerd/ESP-WiFiSettings) size while making the frontend prettier. The frontend's accent color can be changed by `WiFiSettings.accentColor = #6f56ff`.
 
 - CSS overhaul
 - Dropped language seletion (-2% size)
